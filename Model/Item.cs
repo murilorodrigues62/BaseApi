@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BaseApi.Model
 {
-    public class Customer : Base
+    public class Item : Base
     {
         public string Name { get; set; }
-        
+        public decimal Price { get; set; }
     }
 }

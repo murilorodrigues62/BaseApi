@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace BaseApi.Model
 {
-    public class Customer : Base
+    public abstract class Base
     {
-        public string Name { get; set; }
-        
+        public Guid Id { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }

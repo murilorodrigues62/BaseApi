@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BaseApi.Database;
@@ -11,47 +12,47 @@ namespace BaseApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class ItemsController : ControllerBase
     {
         private readonly BaseContext _context;
 
-        public CustomersController(BaseContext context)
+        public ItemsController(BaseContext context)
         {
             _context = context;
         }
 
-        // GET: api/Customers
+        // GET: api/Items
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Item>>> GetItem()
         {
-            return await _context.Customers.ToListAsync();
+            return await _context.Item.ToListAsync();
         }
 
-        // GET: api/Customers/5
+        // GET: api/Items/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(Guid id)
+        public async Task<ActionResult<Item>> GetItem(Guid id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var item = await _context.Item.FindAsync(id);
 
-            if (customer == null)
+            if (item == null)
             {
                 return NotFound();
             }
 
-            return customer;
+            return item;
         }
 
-        // PUT: api/Customers/5
+        // PUT: api/Items/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(Guid id, Customer customer)
+        public async Task<IActionResult> PutItem(Guid id, Item item)
         {
-            if (id != customer.Id)
+            if (id != item.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            _context.Entry(item).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +60,7 @@ namespace BaseApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!ItemExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +73,36 @@ namespace BaseApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
+        // POST: api/Items
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<Item>> PostItem(Item item)
         {
-            _context.Customers.Add(customer);
+            _context.Item.Add(item);
             await _context.SaveChangesAsync();
-            
-            return CreatedAtAction(nameof(GetCustomer), new { id = customer.Id }, customer);
+
+            return CreatedAtAction(nameof(GetItem), new { id = item.Id }, item);
         }
 
-        // DELETE: api/Customers/5
+        // DELETE: api/Items/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(Guid id)
+        public async Task<IActionResult> DeleteItem(Guid id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var item = await _context.Item.FindAsync(id);
+            if (item == null)
             {
                 return NotFound();
             }
 
-            _context.Customers.Remove(customer);
+            _context.Item.Remove(item);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CustomerExists(Guid id)
+        private bool ItemExists(Guid id)
         {
-            return _context.Customers.Any(e => e.Id == id);
+            return _context.Item.Any(e => e.Id == id);
         }
     }
 }
