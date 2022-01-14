@@ -14,7 +14,7 @@ namespace BaseApi.Controllers
         [HttpGet]
         public OkObjectResult Get()
         {
-            return Ok("Base API");
+            return Ok("Base API is running");
         }
     }
 }
