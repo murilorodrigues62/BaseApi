@@ -20,9 +20,10 @@ namespace BaseApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
-            services.AddDbContext<BaseContext>(opt => opt.UseInMemoryDatabase("BaseApi"));
+            //services.AddDbContext<BaseApiContext>(opt => opt.UseInMemoryDatabase("BaseApi"));
+            services.AddDbContext<BaseApiContext>(options => options.UseNpgsql(Configuration["dbContextSettings:ConnectionString"]));
+            
             /*
             services.AddSwaggerGen(c =>
             {

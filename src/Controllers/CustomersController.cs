@@ -13,9 +13,9 @@ namespace BaseApi.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly BaseContext _context;
+        private readonly BaseApiContext _context;
 
-        public CustomersController(BaseContext context)
+        public CustomersController(BaseApiContext context)
         {
             _context = context;
         }
