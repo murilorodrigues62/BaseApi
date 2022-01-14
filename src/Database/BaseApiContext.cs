@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseApi.Database
 {
-    public class BaseContext : DbContext
+    public class BaseApiContext : DbContext
     {
-        public BaseContext(DbContextOptions<BaseContext> options)
+        public BaseApiContext(DbContextOptions<BaseApiContext> options)
             : base(options)
         {
         }
 
         public DbSet<Customer> Customers { get; set; }
 
-        public DbSet<BaseApi.Model.Item> Item { get; set; }
+        public DbSet<Item> Item { get; set; }
     }
 }
