@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace BaseApi
 {
@@ -22,14 +23,13 @@ namespace BaseApi
         {
             services.AddControllers();
             //services.AddDbContext<BaseApiContext>(opt => opt.UseInMemoryDatabase("BaseApi"));
-            services.AddDbContext<BaseApiContext>(options => options.UseNpgsql(DBConfigurations.GetConnectionString()));                
-            
-            /*
+            services.AddDbContext<BaseApiContext>(options => options.UseNpgsql(DBConfigurations.GetConnectionString()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseApi", Version = "v1" });
             });
-            */
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,8 +38,8 @@ namespace BaseApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BaseApi v1"));
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BaseApi v1")); // Access in <app-url>/swagger/index.html
             }
 
             app.UseHttpsRedirection();
