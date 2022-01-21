@@ -24,7 +24,13 @@
       "launchUrl": "api/",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DB_HOST": "localhost",
+        "DB_USERNAME": "base-api",
+        "DB_PASSWORD": "base-api",
+        "DB_DATABASE": "base-api",
+        "DB_PORT": "5432",
+        "DB_SSL": "Disable"
       }
     }
   }

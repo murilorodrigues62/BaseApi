@@ -22,7 +22,7 @@ namespace BaseApi
         {
             services.AddControllers();
             //services.AddDbContext<BaseApiContext>(opt => opt.UseInMemoryDatabase("BaseApi"));
-            services.AddDbContext<BaseApiContext>(options => options.UseNpgsql(Configuration["dbContextSettings:ConnectionString"]));
+            services.AddDbContext<BaseApiContext>(options => options.UseNpgsql(DBConfigurations.GetConnectionString()));                
             
             /*
             services.AddSwaggerGen(c =>
