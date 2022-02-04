@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace BaseApi
 {
@@ -24,6 +25,8 @@ namespace BaseApi
             services.AddControllers();
             //services.AddDbContext<BaseApiContext>(opt => opt.UseInMemoryDatabase("BaseApi"));
             services.AddDbContext<BaseApiContext>(options => options.UseNpgsql(DBConfigurations.GetConnectionString()));
+
+            CreateDatabase(services);
 
             services.AddSwaggerGen(c =>
             {
@@ -52,6 +55,17 @@ namespace BaseApi
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void CreateDatabase(IServiceCollection services)
+        {
+            var serviceProvider = services.BuildServiceProvider();
+            using var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+            var scopedServices = serviceScope.ServiceProvider;
+
+            var dbContext = scopedServices.GetRequiredService<BaseApiContext>();
+
+            dbContext.Database.Migrate();
         }
     }
 }
