@@ -1,0 +1,22 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS publish
+
+COPY . .
+
+ARG NEXUS_USERNAME
+ARG NEXUS_PASSWORD
+
+ENV NEXUS_USERNAME=$NEXUS_USERNAME
+ENV NEXUS_PASSWORD=$NEXUS_PASSWORD
+
+RUN sed -i 's;Nuget - AmbevDevs;nugetambevdevs;' NuGet.Config
+RUN sed -i 's;</packageSources>;</packageSources><packageSourceCredentials><nugetambevdevs><add key="Username" value="'"$NEXUS_USERNAME"'" /><add key="ClearTextPassword" value="'"$NEXUS_PASSWORD"'" /></nugetambevdevs></packageSourceCredentials>;' NuGet.Config   
+
+RUN dotnet publish -c Debug -o /app
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
+
+WORKDIR /app
+
+COPY --from=publish /app .
+
+ENTRYPOINT ["dotnet", "Hub.Pedidos.Presentation.dll"]
