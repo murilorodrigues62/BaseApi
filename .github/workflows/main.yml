@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@main
     - name: Build the tagged Docker image
       run: docker build . --file Dockerfile --tag baseapi
     - name: Tag Docker image
