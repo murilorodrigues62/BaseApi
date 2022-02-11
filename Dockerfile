@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY BaseApi.sln ./
 COPY src/*.csproj ./src/
-COPY tests/*.csproj ./tests/
+COPY tests/UnitTests/*.csproj ./tests/UnitTests
 
 RUN dotnet restore
 COPY . .
