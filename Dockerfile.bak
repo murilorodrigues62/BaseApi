@@ -9,7 +9,7 @@ COPY src/*.csproj ./src/
 RUN dotnet restore
 COPY . .
 
-WORKDIR /src/BaseApi
+WORKDIR /src/src
 RUN dotnet build -c Release -o /app
 
 FROM build AS publish
