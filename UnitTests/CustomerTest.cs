@@ -1,4 +1,4 @@
-using BaseApi.Model;
+using Project.Model;
 using System;
 using Xunit;
 
@@ -14,10 +14,12 @@ namespace UnitTests
             const bool isActive = true;
             const string name = "Name";
 
-            Customer customer = new Customer() {
-            Id = id,
-            IsActive = isActive,
-            Name = name };
+            Customer customer = new Customer()
+            {
+                Id = id,
+                IsActive = isActive,
+                Name = name
+            };
 
             Assert.True(customer != null);
             Assert.Equal(customer.Id, id);

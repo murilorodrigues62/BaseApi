@@ -1,8 +1,8 @@
-﻿using BaseApi.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Project.Model;
 
-namespace BaseApi.Database.Mappings
+namespace Project.Database.Mappings
 {
     public class CustomerMapping : IEntityTypeConfiguration<Customer>
     {
@@ -12,7 +12,7 @@ namespace BaseApi.Database.Mappings
 
             builder.HasIndex(x => new
             {
-                x.Document             
+                x.Document
             });
 
             builder.Property(x => x.Name)

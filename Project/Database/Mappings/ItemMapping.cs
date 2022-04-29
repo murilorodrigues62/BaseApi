@@ -1,8 +1,8 @@
-﻿using BaseApi.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Project.Model;
 
-namespace BaseApi.Database.Mappings
+namespace Project.Database.Mappings
 {
     public class ItemMapping : IEntityTypeConfiguration<Item>
     {

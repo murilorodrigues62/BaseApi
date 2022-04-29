@@ -1,9 +1,9 @@
-﻿using BaseApi.Configurations;
-using BaseApi.Database.Mappings;
-using BaseApi.Model;
+﻿using Project.Database.Mappings;
 using Microsoft.EntityFrameworkCore;
+using Project.Configurations;
+using Project.Model;
 
-namespace BaseApi.Database
+namespace Project.Database
 {
     public class BaseApiContext : DbContext
     {
@@ -20,7 +20,7 @@ namespace BaseApi.Database
         {
             modelBuilder.HasDefaultSchema(AppConfigurations.ServiceName);
             modelBuilder.ApplyConfiguration(new ItemMapping());
-            modelBuilder.ApplyConfiguration(new CustomerMapping());            
+            modelBuilder.ApplyConfiguration(new CustomerMapping());
             base.OnModelCreating(modelBuilder);
         }
     }

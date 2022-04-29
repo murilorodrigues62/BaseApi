@@ -1,4 +1,3 @@
-using BaseApi.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,9 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Project.Configurations;
+using Project.Database;
 using System;
 
-namespace BaseApi
+namespace Project
 {
     public class Startup
     {

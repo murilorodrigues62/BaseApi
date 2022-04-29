@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BaseApi.Model
+namespace Project.Model
 {
     public abstract class Base
     {

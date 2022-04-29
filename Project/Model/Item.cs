@@ -1,4 +1,4 @@
-﻿namespace BaseApi.Model
+﻿namespace Project.Model
 {
     public class Item : Base
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BaseApi.Configurations
+namespace Project.Configurations
 {
     public class AppConfigurations
     {

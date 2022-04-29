@@ -1,8 +1,8 @@
-﻿using BaseApi.Model;
+﻿using Project.Model;
 using System;
 using Xunit;
 
-namespace BaseApi.UnitTests
+namespace UnitTests
 {
     public class ItemTest
     {
