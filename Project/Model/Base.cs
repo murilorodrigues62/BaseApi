@@ -6,5 +6,7 @@ namespace Project.Model
     {
         public Guid Id { get; set; }
         public bool IsActive { get; set; } = true;
+        public DateTime CreatedAt { get; set; }
+        public DateTime LastModifiedAt { get; set; }
     }
 }

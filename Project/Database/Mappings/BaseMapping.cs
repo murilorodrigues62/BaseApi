@@ -13,6 +13,12 @@ namespace Project.Database.Mappings
 
             builder.Property(x => x.IsActive)
                 .IsRequired();
+
+            builder.Property(x => x.CreatedAt)
+                .IsRequired();
+
+            builder.Property(x => x.LastModifiedAt)
+                .IsRequired();
         }
     }
 }

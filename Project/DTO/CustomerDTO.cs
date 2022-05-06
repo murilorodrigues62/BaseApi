@@ -1,6 +1,6 @@
-﻿namespace Project.Model
+﻿namespace Project.DTO
 {
-    public class Customer : Base
+    public class CustomerDTO : BaseDTO
     {
         public string Name { get; set; }
         public string Document { get; set; }

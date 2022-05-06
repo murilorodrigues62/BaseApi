@@ -11,6 +11,7 @@ namespace Project.Configurations
         public static string Database => Environment.GetEnvironmentVariable("DB_DATABASE") ?? AppConfigurations.ServiceName;
         public static int Port => int.Parse(Environment.GetEnvironmentVariable("DB_PORT") ?? "5432");
         public static string Ssl => Environment.GetEnvironmentVariable("DB_SSL_MODE") ?? "Disable";
+        public static string Schema => Environment.GetEnvironmentVariable("DB_SCHEMA") ?? "public";
 
         public static string GetConnectionString()
         {
@@ -22,7 +23,8 @@ namespace Project.Configurations
                 Port = Port,
                 Database = $"{Database}",
                 ApplicationName = AppConfigurations.ServiceName,
-                SslMode = Enum.Parse<SslMode>(Ssl)
+                SslMode = Enum.Parse<SslMode>(Ssl),
+                SearchPath = Schema
             };
 
             return connectionStringBuilder.ConnectionString;

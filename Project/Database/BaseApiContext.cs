@@ -18,7 +18,7 @@ namespace Project.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema(AppConfigurations.ServiceName);
+            modelBuilder.HasDefaultSchema(DBConfigurations.Schema);
             modelBuilder.ApplyConfiguration(new ItemMapping());
             modelBuilder.ApplyConfiguration(new CustomerMapping());
             base.OnModelCreating(modelBuilder);
