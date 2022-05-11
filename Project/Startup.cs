@@ -7,7 +7,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Project.Configurations;
 using Project.Database;
-using System;
+using Project.Database.Repositories;
+using Project.Database.Repositories.Interfaces;
+using Project.Mapper;
+using Project.Services;
+using Project.Services.Interfaces;
 
 namespace Project
 {
@@ -23,17 +27,26 @@ namespace Project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            //services.AddDbContext<BaseApiContext>(opt => opt.UseInMemoryDatabase("BaseApi"));
-            services.AddDbContext<BaseApiContext>(options => options.UseNpgsql(DBConfigurations.GetConnectionString()));
+            services.AddControllers();            
 
-            CreateDatabase(services);
+            //services.AddDbContext<BaseApiContext>(opt => opt.UseInMemoryDatabase("BaseApi"));
+            services.AddDbContext<BaseApiContext>(options => options.UseNpgsql(DBConfigurations.GetConnectionString(), options =>
+            {
+                options.MigrationsHistoryTable("__EFMigrationsHistory", DBConfigurations.Schema);
+            }));
+
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
+
+            services.AddSingleton(MapperConfigurations.GetConfiguredMappingConfig());
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BaseApi", Version = "v1" });
             });
 
+            CreateDatabase(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +68,7 @@ namespace Project
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
+            });            
         }
 
         private void CreateDatabase(IServiceCollection services)
